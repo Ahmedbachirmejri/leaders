@@ -15,14 +15,12 @@
 int
 main (int argc, char *argv[])
 {
-  GtkWidget *Interface;
-  GtkWidget *windowajouter;
-  GtkWidget *windowmodifier;
-  GtkWidget *windowsupprimer;
-  GtkWidget *fenetre_ajout;
-  GtkWidget *gestionouvrier;
-  GtkWidget *interfaceprincipale;
-  GtkWidget *login;
+  GtkWidget *espaceC;
+  GtkWidget *reclclient;
+  GtkWidget *ajout;
+  
+GtkWidget *treeclient;
+
 #ifdef ENABLE_NLS
   bindtextdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR);
   bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -32,29 +30,67 @@ main (int argc, char *argv[])
   gtk_set_locale ();
   gtk_init (&argc, &argv);
 
-  add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
+  add_pixmap_directory ("../pixmaps");
 
   /*
    * The following code was added by Glade to create one of each component
    * (except popup menus), just so that you see something after building
    * the project. Delete any components that you don't want shown initially.
    */
-  /*Interface = create_Interface ();
-  gtk_widget_show (Interface);
-  fenetre_ajout = create_fenetre_ajout ();
-  gtk_widget_show (fenetre_ajout);
-  gestionouvrier = create_gestionouvrier ();
-  gtk_widget_show (gestionouvrier);
-  interfaceprincipale=create_interfaceprincipale ();
-  gtk_widget_show (interfaceprincipale);*/
-  login = create_login ();
-  gtk_widget_show (login);
-  /*windowajouter = create_windowajouter ();
-  gtk_widget_show (windowajouter);
-  windowmodifier = create_windowmodifier ();
-  gtk_widget_show (windowmodifier);
-  windowsupprimer = create_windowsupprimer ();
-  gtk_widget_show (windowsupprimer);*/
+ GtkWidget *SetupespaceC(gchar *data,gboolean Transient)
+{
+    GdkPixmap *background;
+    GdkPixbuf *pixbuf;
+    GdkScreen *ourscreen;
+    GdkColormap *colormap;
+    GtkStyle *style;
+    GdkColor fg;
+    GdkColor bg;
+    GError *error = NULL;
+    GdkRectangle *rect;
+    GtkWidget *espaceC;
+    
+
+    pixbuf = gdk_pixbuf_new_from_file ("image.png",&error);
+    if (error != NULL) {
+        if (error->domain == GDK_PIXBUF_ERROR) {
+            g_print ("Pixbuf Related Error:\n");
+        }
+        if (error->domain == G_FILE_ERROR) {
+            g_print ("File Error: Check file permissions and state:\n");
+        }
+
+        g_printerr ("%s\n", error[0].message);
+        exit(1);
+    }
+    gdk_pixbuf_render_pixmap_and_mask (pixbuf, &background, NULL, 0);
+    style = gtk_style_new ();
+    style->bg_pixmap[0] = background;
+    espaceC = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title (GTK_WINDOW (espaceC), data);
+    
+ 
+  
+
+    // gtk_window_maximize(GTK_WINDOW(espaceC));
+    gtk_window_set_modal (GTK_WINDOW (espaceC),TRUE);
+    gtk_window_set_default_size(GTK_WINDOW(espaceC),640,480);
+    gtk_widget_set_style (GTK_WIDGET(espaceC), GTK_STYLE(style));
+    gtk_window_set_position(GTK_WINDOW(espaceC),GTK_WIN_POS_CENTER_ALWAYS);
+    gtk_container_set_border_width(GTK_CONTAINER(espaceC), 14);
+    if(Transient==TRUE)
+    gtk_window_set_transient_for(GTK_WINDOW (espaceC),GTK_WINDOW(espaceC));
+    gtk_widget_show (espaceC);
+    
+
+    return(espaceC);
+}
+
+  
+
+espaceC = create_espaceC ();
+  gtk_widget_show (espaceC);
+
 
   gtk_main ();
   return 0;
