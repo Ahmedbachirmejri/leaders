@@ -1,0 +1,61 @@
+FILE *f10;
+char ref2[20];
+char etat2[20];
+char valeur2[20];
+char type2[20];
+char ref14[20];
+char etat14[20];
+char valeur14[20];
+char type14[20];
+char mq2[20];
+char mq14[20];
+char mq15[20];
+int count;
+char c;
+int i,j;
+int captdef=0;
+int captdef2=0;
+f10=fopen("capteurdef.txt","r");
+
+for (c = getc(f10); c != EOF; c = getc(f10)) 
+if (c == '\n')  
+count = count + 1; 
+
+if (f10!=NULL)
+{
+for (c = getc(f10); c != EOF; c = getc(f10)) 
+if (c == '\n')  
+count = count + 1; 
+}
+for (i=0;i<count;i++)
+{
+if (fscanf(f10,"%s %s %s %s %s \n",ref2,etat2,valeur2,type2,mq2)!=EOF)
+  j=i+1;
+  captdef2=captdef;
+  captdef=0;
+    for (j=count-1;j>=0;j--)
+    {
+     if (fscanf(f10,"%s %s %s %s %s \n",ref14,etat14,valeur14,type14,mq14)!=EOF)
+     if (strcmp(mq14,mq2)==0)
+      {
+       captdef = captdef+1;
+      }
+if (captdef>captdef2)
+{ strcpy (marque,mq14);
+}      
+}
+}
+strcpy(def,"la marque la plus mauvaise est");
+strcat(def,marque);
+fclose(f10);
+
+
+
+j2= gtk_spin_button_get_value_as_int (GTK_SPIN_BUTTON(jour));
+m2= gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(mois));
+a2= gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(annee));
+
+sprintf(j1,"%d",j2);
+sprintf(m1,"%d",m2);
+sprintf(a1,"%d",a2);
+

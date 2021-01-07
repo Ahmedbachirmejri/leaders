@@ -9,13 +9,14 @@ char mois[20];
 char annee[20];
 char poids[20];
 char type[20];
+char rech_id[20];
 }troupeau;
 
 troupeau tr[100];
 
 void ajout_troupeau(troupeau t);
 
-int rechercher (char *rech_id[20]);
+int rechercher (char rech_id[]);
 void modif_espece(troupeau m,char id[20]);
 
 void supprimer(troupeau s);

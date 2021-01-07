@@ -152,7 +152,6 @@ void modif_espece(troupeau m,char id[20])
 
 
 
-
 void supprimer(troupeau s)
 {
 	
@@ -197,7 +196,7 @@ int calcul(char rtype[])
 	
 }
 
-int rechercher (char *rech_id[20])
+int rechercher (char rech_id[])
 {
 FILE *f;
 troupeau r;
